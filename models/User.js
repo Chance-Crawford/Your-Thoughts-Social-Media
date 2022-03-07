@@ -1,7 +1,8 @@
 const { Schema, model } = require('mongoose');
+const Thought = require('./Thought');
 
 // from validator, checks to see if string matches an email format
-import { isEmail } from 'validator';
+const { isEmail } = require('validator');
 
 const UserSchema = new Schema(
     {
@@ -40,8 +41,17 @@ const UserSchema = new Schema(
         // set id to false because this is a virtual that Mongoose returns, 
         // and it is not needed.
         id: false
-      }
+    }
 );
+
+UserSchema.pre('remove', function(next){
+    for(var i = 0; i < this.thoughts.length; i++){
+        var currThought = this.thoughts[i];
+
+        Thought.findOneAndDelete({ _id: currThought._id });
+    }
+    next();
+});
 
 // a virtual called friendCount that retrieves the length of the user's 
 // friends array field on query.
