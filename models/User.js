@@ -1,5 +1,4 @@
 const { Schema, model } = require('mongoose');
-const formatDate = require('../utils/formatDate');
 
 // from validator, checks to see if string matches an email format
 import { isEmail } from 'validator';
@@ -47,7 +46,7 @@ const UserSchema = new Schema(
 // a virtual called friendCount that retrieves the length of the user's 
 // friends array field on query.
 UserSchema.virtual('friendCount').get(function(){
-    return this.friends.length
+    return this.friends.length;
 });
 
 // set model in database
