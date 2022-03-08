@@ -44,14 +44,6 @@ const UserSchema = new Schema(
     }
 );
 
-UserSchema.pre('remove', function(next){
-    for(var i = 0; i < this.thoughts.length; i++){
-        var currThought = this.thoughts[i];
-
-        Thought.findOneAndDelete({ _id: currThought._id });
-    }
-    next();
-});
 
 // a virtual called friendCount that retrieves the length of the user's 
 // friends array field on query.

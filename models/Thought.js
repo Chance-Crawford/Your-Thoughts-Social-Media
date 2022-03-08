@@ -51,6 +51,10 @@ const ThoughtSchema = new Schema(
             type: String,
             required: true
         },
+        userId: {
+            type: String,
+            required: true
+        },
         // Array of nested documents created with the reactionSchema
         // reactions exist within an array inside the thought document and 
         // adhere to the Reaction schema defined above.
