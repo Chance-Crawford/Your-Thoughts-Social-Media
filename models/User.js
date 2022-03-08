@@ -2,7 +2,7 @@ const { Schema, model } = require('mongoose');
 const Thought = require('./Thought');
 
 // from validator, checks to see if string matches an email format
-const { isEmail } = require('validator');
+const validator = require('validator');
 
 const UserSchema = new Schema(
     {
@@ -17,7 +17,7 @@ const UserSchema = new Schema(
             unique: true,
             required: true,
             trim: true,
-            validate: [ isEmail, 'invalid email' ]
+            validate: [ validator.isEmail, 'invalid email' ]
         },
         // Array of the users thoughts. _id values referencing the Thought model
         thoughts: [
